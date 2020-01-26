@@ -1,60 +1,80 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
+    <v-navigation-drawer temporary app v-model="sideNav">
+      <v-list>
+        <v-list-item v-for="item in menuItems" :key="item.title" router :to="item.link">
+          <v-list-item-icon>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="userIsAuthenticated" @click="onLogout">
+          <v-list-item-icon>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar app dark class="purple darken-4">
+      <v-app-bar-nav-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-toolbar-items class="d-none d-md-block">
+        <v-btn text v-for="item in menuItems" :key="item.title" router :to="item.link">
+          <v-icon left>{{item.icon}}</v-icon>
+          {{item.title}}
+        </v-btn>
+        <v-btn text v-if="userIsAuthenticated" @click="onLogout">
+          <v-icon left>exit_to_app</v-icon>Logout
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
-
     <v-content>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
   data: () => ({
-    //
+    sideNav: false
   }),
+  computed: {
+    menuItems() {
+      let menuItems = [
+        { icon: "face", title: "Sign up", link: "/signup" },
+        { icon: "lock_open", title: "Sign in", link: "/signin" }
+      ];
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          {
+            icon: "supervisor_account",
+            title: "View Meetups",
+            link: "/meetups"
+          },
+          { icon: "room", title: "Organaze Meetups", link: "/meetups/new" },
+          { icon: "person", title: "Profile", link: "/profile" }
+        ];
+      }
+      return menuItems;
+    },
+    userIsAuthenticated() {
+      return this.$store.getters.user;
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/");
+    }
+  }
 };
 </script>

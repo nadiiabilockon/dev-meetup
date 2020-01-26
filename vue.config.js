@@ -1,5 +1,7 @@
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
-  ]
-}
+  transpileDependencies: ["vuetify"],
+  configureWebpack: {
+    devtool: "source-map"
+  },
+  publicPath: process.env.NODE_ENV === "production" ? "/dev-meetup/" : "/"
+};
