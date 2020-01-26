@@ -16,4 +16,4 @@ npm run build
 echo Deploying.. 
 git add -A 
 git commit -m 'deploy' 
-git push -f https://github.com/nadiiabilockon/dev-meetup develop
+git push -f https://github.com/nadiiabilockon/dev-meetup master
