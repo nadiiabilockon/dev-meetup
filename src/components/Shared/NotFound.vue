@@ -6,7 +6,7 @@
           <h1>Oops!</h1>
           <h2>404 - The Page can't be found</h2>
         </div>
-         <v-btn large router class="info" to="/">Go TO Homepage</v-btn>
+         <v-btn large router class="info" to="/dev-meetup">Go TO Homepage</v-btn>
       </div>
     </div>
   </v-container>

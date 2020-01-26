@@ -126,7 +126,7 @@ export default {
         date: this.submittableDateTime
       };
       this.$store.dispatch("createMeetup", meetupData);
-      this.$router.push("/meetups");
+      this.$router.push("/dev-meetup/meetups");
     },
     onFilePicked(file) {
       let fileName = file.name;

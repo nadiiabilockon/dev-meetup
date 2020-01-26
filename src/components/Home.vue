@@ -2,10 +2,10 @@
   <v-container>
     <v-row class="mb-2">
       <v-col sm="6" class="text-center text-sm-right">
-        <v-btn large router class="info" to="/meetups">Explore Meetups</v-btn>
+        <v-btn large router class="info" to="/dev-meetup/meetups">Explore Meetups</v-btn>
       </v-col>
       <v-col sm="6" class="text-center text-sm-left">
-        <v-btn large router class="info" to="/meetups/new">Organize Meetup</v-btn>
+        <v-btn large router class="info" to="/dev-meetup/meetups/new">Organize Meetup</v-btn>
       </v-col>
     </v-row>
     <v-row class="mb-2" v-if="loading">
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     onLoadMeetup(id) {
-      this.$router.push("/meetups/" + id);
+      this.$router.push("/dev-meetup/meetups/" + id);
     }
   }
 };
