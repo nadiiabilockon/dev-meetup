@@ -10,18 +10,29 @@
             <v-list-item-title>{{item.title}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="userIsAuthenticated" @click="onLogout">
+          <v-list-item-icon>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app dark class="purple darken-4">
-      <v-app-bar-nav-icon @click="sideNav = !sideNav" class="hidden-sm-and-up"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="d-none d-sm-block">
+      <v-toolbar-items class="d-none d-md-block">
         <v-btn text v-for="item in menuItems" :key="item.title" router :to="item.link">
           <v-icon left>{{item.icon}}</v-icon>
           {{item.title}}
+        </v-btn>
+        <v-btn text v-if="userIsAuthenticated" @click="onLogout">
+          <v-icon left>exit_to_app</v-icon>Logout
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
@@ -57,6 +68,12 @@ export default {
     },
     userIsAuthenticated() {
       return this.$store.getters.user;
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/");
     }
   }
 };

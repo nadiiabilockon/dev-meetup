@@ -39,14 +39,7 @@
           </v-row>
           <v-row>
             <v-col cols="12" sm="6" offset-sm="3">
-              <v-text-field
-                name="imgSrs"
-                label="Imgage Url"
-                id="img-url"
-                v-model="imgSrs"
-                :rules="[() => !!imgSrs || 'This field is required']"
-                required
-              ></v-text-field>
+              <v-file-input label="Imgage Url" prepend-icon="mdi-camera" @change="onFilePicked"></v-file-input>
             </v-col>
           </v-row>
           <v-row>
@@ -62,17 +55,15 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" offset-sm="3">
-              <v-date-picker v-model="date" header-color="primary"></v-date-picker>
+            <v-col class="text-center text-md-right">
+              <v-date-picker v-model="date" header-color="primary" style="height:100%"></v-date-picker>
+            </v-col>
+            <v-col class="text-center text-md-left">
+              <v-time-picker v-model="time" format="24hr" header-color="primary" style="height:100%"></v-time-picker>
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" offset-sm="3">
-              <v-time-picker v-model="time" format="24hr" header-color="primary"></v-time-picker>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" sm="6" offset-sm="3">
+            <v-col cols="12" sm="6" offset-sm="3"  class="text-center">
               <v-btn color="primary" :disabled="!formIsValid" type="submit">Create Meetup</v-btn>
             </v-col>
           </v-row>
@@ -91,7 +82,8 @@ export default {
       imgSrs: "",
       description: "",
       date: new Date().toISOString().substr(0, 10),
-      time: new Date()
+      time: new Date(),
+      image: null
     };
   },
   computed: {
@@ -123,15 +115,30 @@ export default {
       if (!this.formIsValid) {
         return;
       }
+      if (!this.image) {
+        return;
+      }
       const meetupData = {
         title: this.title,
         location: this.location,
-        imgSrs: this.imgSrs,
+        image: this.image,
         description: this.description,
         date: this.submittableDateTime
       };
       this.$store.dispatch("createMeetup", meetupData);
       this.$router.push("/meetups");
+    },
+    onFilePicked(file) {
+      let fileName = file.name;
+      if (fileName.lastIndexOf(".") <= 0) {
+        return alert("Please add valid file");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imgSrs = fileReader.result;
+      });
+      fileReader.readAsDataURL(file);
+      this.image = file;
     }
   }
 };
