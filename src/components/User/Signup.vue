@@ -91,7 +91,7 @@ export default {
   watch: {
     user(value) {
       if (value) {
-        this.$router.push("/");
+        this.$router.push("/dev-meetup/");
       }
     }
   },

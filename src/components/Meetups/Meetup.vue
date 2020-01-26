@@ -36,7 +36,7 @@
             ></app-register-meetup-dialog>
             <div v-else-if="!userIsCreator">
               <span class="mr-2">Already a member?</span>
-              <a class="info--text" :href="'/signin'">Sign in</a>
+              <a class="info--text" :href="'/dev-meetup/signin'">Sign in</a>
             </div>
           </v-card-actions>
         </v-card>

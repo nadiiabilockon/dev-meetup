@@ -13,40 +13,40 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/dev-meetup/",
     name: "Home",
     component: Home
   },
   {
-    path: "/meetups",
+    path: "/dev-meetup/meetups",
     name: "Meetups",
     component: Meetups
   },
   {
-    path: "/meetups/new",
+    path: "/dev-meetup/meetups/new",
     name: "CreateMeetup",
     component: CreateMeetup,
     beforeEnter: AuthGuard
   },
   {
-    path: "/meetups/:id",
+    path: "/dev-meetup/meetups/:id",
     name: "Meetup",
     props: true,
     component: Meetup
   },
   {
-    path: "/profile",
+    path: "/dev-meetup/profile",
     name: "Profile",
     component: Profile,
     beforeEnter: AuthGuard
   },
   {
-    path: "/signup",
+    path: "/dev-meetup/signup",
     name: "Signup",
     component: Signup
   },
   {
-    path: "/signin",
+    path: "/dev-meetup/signin",
     name: "Signin",
     component: Signin
   },

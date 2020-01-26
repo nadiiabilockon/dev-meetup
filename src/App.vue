@@ -23,7 +23,7 @@
     <v-app-bar app dark class="purple darken-4">
       <v-app-bar-nav-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
+        <router-link to="/dev-meetup" tag="span" style="cursor: pointer">DevMeetup</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="d-none d-md-block">
@@ -50,18 +50,18 @@ export default {
   computed: {
     menuItems() {
       let menuItems = [
-        { icon: "face", title: "Sign up", link: "/signup" },
-        { icon: "lock_open", title: "Sign in", link: "/signin" }
+        { icon: "face", title: "Sign up", link: "/dev-meetup/signup" },
+        { icon: "lock_open", title: "Sign in", link: "/dev-meetup/signin" }
       ];
       if (this.userIsAuthenticated) {
         menuItems = [
           {
             icon: "supervisor_account",
             title: "View Meetups",
-            link: "/meetups"
+            link: "/dev-meetup/meetups"
           },
-          { icon: "room", title: "Organaze Meetups", link: "/meetups/new" },
-          { icon: "person", title: "Profile", link: "/profile" }
+          { icon: "room", title: "Organaze Meetups", link: "/dev-meetup/meetups/new" },
+          { icon: "person", title: "Profile", link: "/dev-meetup/profile" }
         ];
       }
       return menuItems;
@@ -73,7 +73,7 @@ export default {
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
-      this.$router.push("/");
+      this.$router.push("/dev-meetup/");
     }
   }
 };

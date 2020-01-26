@@ -14,7 +14,7 @@
                   <div class="font-italic">{{ meetup.date | date }}</div>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text :to="'/meetups/' + meetup.id">
+                  <v-btn text :to="'/dev-meetup/meetups/' + meetup.id">
                     <v-icon left ligth>arrow_forward</v-icon>View meetup
                   </v-btn>
                 </v-card-actions>

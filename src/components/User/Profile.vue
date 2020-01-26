@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     onLoadMeetup(id) {
-      this.$router.push("/meetups/" + id);
+      this.$router.push("/dev-meetup/meetups/" + id);
     }
   }
 };
