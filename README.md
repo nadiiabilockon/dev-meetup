@@ -1,24 +1,10 @@
-# dev-meetup
+## Dev-meetup app
 
-## Project setup
-```
-npm install
-```
+Dev-meetup is apps that allow you to discover great events or create your own.
+This app gives you the ability to creating and managing your own event and became a participant in other meetups.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Dev-meetup Demo](public/demo.gif)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Using the Firebase to storing data and implement authentication.
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Try](https://nadiiabilockon.github.io/dev-meetup/)
